@@ -7,8 +7,8 @@ export const proyectos = [
     descripcion: "Descripción breve del proyecto 1.",
     imagen: urbanStyle.src,
     tecnologias: ["React", "Tailwind", "Firebase"],
-    demo: "https://front-react-todo.onrender.com",
-    codigo: "https://github.com/Lautaro-R-collins/Front-react-todo",
+    demo: "https://proyecto-final-rodriguez-sable.vercel.app/",
+    codigo: "https://github.com/Lautaro-R-collins/ProyectoFinal-Rodriguez.git",
   },
   {
     titulo: "Tienda Artesana",
