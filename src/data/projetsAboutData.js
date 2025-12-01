@@ -1,5 +1,5 @@
-import urbanStyle from "../assets/img-projects/urbanStyle.png";
-import imgNote from "../assets/img-projects/note-app.png";
+import urbanStyle from "../assets/img-projects/we.png";
+import imgNote from "../assets/img-projects/div-pro.png";
 
 export const proyectos = [
   {
@@ -12,8 +12,7 @@ export const proyectos = [
   },
   {
     titulo: "Divina Providencia – Airbnb landing page",
-    imagen:
-      "https://i.pinimg.com/736x/c9/70/bf/c970bfbc24489e39418b2c1b1f8f74ef.jpg",
+    imagen: imgNote.src,
     tecnologias: ["Astro", "CSS", "Boostrap", "JavaScript"],
     demo: "https://divina-providencia-v3.vercel.app/",
     codigo: "https://github.com/NicoAndDestroy/Divina-Providencia-v3",
