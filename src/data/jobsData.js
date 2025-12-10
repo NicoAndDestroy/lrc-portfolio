@@ -1,34 +1,26 @@
 export const jobs = [
   {
-    title: "Frontend Developer - Neowyze",
-    time: ["12/2024 - 03/2025"],
+    title: "Front-End Developer / CMS Specialist – Nationwide Marketing Group",
+    time: ["Apr 2025 – Present"],
     description:
-      "Mis tareas en Neowyze consisten en desarrollar webs responsivas basadas en diseños proporcionados en Figma, utilizando Astro, React, Tailwind y otras librerías frontend.",
+      "As a Front-End Developer, I am responsible for migrating legacy websites into our internal CMS platform. My work includes rebuilding components and full-page layouts using HTML5, CSS3, JavaScript, and Bootstrap 5, while ensuring accessibility, performance, and UX consistency.",
     list: [
-      "Para el flujo de trabajo, utilizo Jira como herramienta de gestión y Git/GitHub como sistema de control de versiones.",
-      "Trabajo bajo la metodología ágil Scrum, con sprints de 2 semanas y dos reuniones diarias (dailies) para planificar el proyecto y presentar avances",
+      "Improve UX and readability through interface simplification, mobile-first layouts, and semantic HTML.",
+      "Optimize SEO by updating metadata, improving structure, and applying WCAG AA accessibility standards.",
+      "Collaborate with cross-functional teams to support multiple U.S. e-commerce clients and build custom landing pages.",
+      "Use Git for version control and Microsoft Teams / Monday.com for project coordination and workflow management.",
     ],
   },
   {
-    title: "Frontend Developer - Vegna",
-    time: ["05/2024 - 02/2024"],
-    description: "Desarrollo y mantenimiento de interfaces de usuario con:",
-    list: ["JavaScript - TypeScript", "React - Next.js", "Tailwind", "Shadcn"],
-  },
-  {
-    title: "Frontend Developer - Igrowker",
-    time: ["07/2022 - 08/2022"],
-    description: "Desarrollo y mantenimiento de interfaces de usuario con",
-    list: ["React - React Router - Context api - CSS - Material UI"],
-  },
-  {
-    title: " Web Developer - NoCountry",
-    time: ["03/2022 - 06/2022"],
+    title: "Freelance Front-End Web Developer",
+    time: ["Mar 2023 – Jun 2025"],
     description:
-      "Desarrollo de aplicaciones web responsivas MVP fullstack usando para su desarrollo tecnologías como",
+      "Designed and developed highly optimized websites for small businesses, focusing on performance, modern UI practices, and accessible design principles. Specialized in Astro and component-driven development.",
     list: [
-      "Frontend : React - React Router - Context api - tailwindcss",
-      "Backend : API REST con Express.js, MongoDB",
+      "Created responsive and visually appealing landing pages with excellent SEO and fast loading times.",
+      "Implemented clean semantic HTML, CSS architecture, and user-friendly navigation flows.",
+      "Delivered fully customized websites that align with business goals and brand identity.",
+      "Tech stack: Astro, React, JavaScript, Tailwind CSS, and Node.js.",
     ],
   },
 ];
