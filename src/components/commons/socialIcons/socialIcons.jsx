@@ -1,5 +1,4 @@
 import {
-  FaXTwitter,
   FaLinkedinIn,
   FaGithub,
   FaInstagram,
@@ -9,7 +8,7 @@ const SocialIcons = () => {
   return (
     <div className="my-5 flex items-center justify-center">
       <a
-        href="https://www.linkedin.com/in/lautaro-rodr%C3%ADguez-collins-40505624a/"
+        href="https://www.linkedin.com/in/nicolas-morales-663297a3/"
         target="_blank"
         rel="noopener noreferrer"
         className="mr-3 text-zinc-400 hover:text-[#69c7c7]"
@@ -19,7 +18,7 @@ const SocialIcons = () => {
       </a>
 
       <a
-        href="https://github.com/Lautaro-R-collins"
+        href="https://github.com/NicoAndDestroy"
         target="_blank"
         rel="noopener noreferrer"
         className="mx-3 text-zinc-400 hover:text-[#69c7c7]"
@@ -29,17 +28,7 @@ const SocialIcons = () => {
       </a>
 
       <a
-        href="https://x.com/lautarodevelops/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mx-3 text-zinc-400 hover:text-[#69c7c7]"
-        aria-label="Twitter"
-      >
-        <FaXTwitter className="h-7 w-7" />
-      </a>
-
-      <a
-        href="https://www.instagram.com/lautarodevelops/"
+        href="https://www.instagram.com/j_nicolas_m_s"
         target="_blank"
         rel="noopener noreferrer"
         className="mx-3 text-zinc-400 hover:text-[#69c7c7]"
