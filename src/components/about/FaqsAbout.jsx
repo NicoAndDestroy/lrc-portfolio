@@ -67,7 +67,7 @@ const skills = {
       <div className="site-container mt-10">
         <h2 class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-white md:flex-row md:items-center md:text-end">
           <span class="hidden h-1.5 grow rounded-lg drop-shadow-[2px_2px_0_#0debd8] bg-[#7836cf] md:block"></span>
-          <span class="drop-shadow-[2px_2px_0_#7836cf]">Mas Sobre Mi</span>
+          <span class="drop-shadow-[2px_2px_0_#7836cf]">More about me</span>
         </h2>
         <ul className="mt-4 space-y-4 text-lg">
           {Object.entries(skills).map(([category, items]) => (
