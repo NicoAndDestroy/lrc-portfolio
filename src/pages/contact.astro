@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import MiFoto from "../assets/img/MiFoto.jpg";
 import CopyMail from "../components/links/copyMail.jsx";
+import Antigravity from "../components/background/Antigravity.jsx";
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 
 const links = [
@@ -24,22 +25,28 @@ const links = [
 ---
 
 <Layout>
+  <Antigravity client:load />
   <section
-    class="bg-gray-900 flex min-h-screen flex-col items-center justify-center px-6 text-white"
+    class="relative flex min-h-screen flex-col items-center justify-center px-6 text-white"
   >
+  
+
     <!-- Header -->
-    <div class="mb-12 text-center max-w-xl">
+    <div class="relative z-10 mb-12 text-center max-w-xl">
       <div class="relative mx-auto mb-6 flex items-center justify-center">
-        <img
-          src={MiFoto.src}
-          alt="Photo of Nicolas Morales"
-          class="border-primary h-32 w-32 rounded-full shadow-lg z-10"
-        />
+        <div class="h-45 w-45 rounded-full overflow-hidden z-10">
+<img
+  src={MiFoto.src}
+  alt="Photo of Nicolas Morales"
+  class="h-full w-full object-cover shadow-lg"
+  style="object-position: center 30%;"
+/>
+</div>
 
         <!-- Circular text -->
         <svg
           viewBox="0 0 200 200"
-          class="absolute h-48 w-48 animate-spin-slow opacity-80"
+          class="absolute h-70 w-70 animate-spin-slow opacity-80"
           aria-hidden="true"
         >
           <path
@@ -66,10 +73,12 @@ const links = [
     </div>
 
     <!-- Copy Email -->
-    <CopyMail client:visible />
+    <div class="relative z-10">
+  <CopyMail client:visible />
+</div>
 
     <!-- Links -->
-    <div class="mt-8 w-full max-w-md space-y-4">
+    <div class="relative z-10 mt-8 w-full max-w-md space-y-4">
       {
         links.map((link) => (
           <a
@@ -80,7 +89,7 @@ const links = [
               hover:bg-secondary hover:-translate-y-0.5
               drop-shadow-[2px_2px_0_#0debd8] active:translate-y-0"
           >
-            <link.icon class="text-xl opacity-90 group-hover:scale-110 transition-transform" />
+            <link.icon className="text-xl opacity-90 group-hover:scale-110 transition-transform" />
             {link.label}
           </a>
         ))

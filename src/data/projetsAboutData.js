@@ -1,7 +1,7 @@
 import urbanStyle from "../assets/img-projects/we.png";
 import imgNote from "../assets/img-projects/div-pro.png";
 
-export const proyectos = [
+export const projects = [
   {
     titulo: "Wedding in Cartagena – Luxury Weddings",
     descripcion: "This landing page is optimized to showcase the exclusive experiences, events, and luxury weddings organized by our client in Cartagena. Designed in Astro for maximum speed, it focuses on converting visitors into clients through an elegant, visually appealing, and engaging design.",

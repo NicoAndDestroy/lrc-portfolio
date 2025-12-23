@@ -4,11 +4,11 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/commons/hero/hero.astro";
 import ProjectCard from "../components/project/proyectCard.astro";
 import Banner from "../components/commons/banners/banner.astro";
-import { proyectos } from "../data/projectData.js";
+import { projects } from "../data/projectData.js";
 ---
 
-<Layout title="Proyectos" description="Proyectos">
-  <Hero titulo="Proyectos" />
+<Layout title="projects" description="projects">
+  <Hero titulo="projects" />
   <!-- Botones -->
   <div class="mt-6 mb-6 flex flex-wrap justify-center gap-3 px-2">
     <button
@@ -43,7 +43,7 @@ import { proyectos } from "../data/projectData.js";
     class="4xl:px-96 flex flex-wrap justify-center gap-5 px-3 pt-5 xl:px-32 2xl:px-60"
   >
     {
-      proyectos.map((proyecto) => (
+      projects.map((proyecto) => (
         <ProjectCard
           titulo={proyecto.titulo}
           descripcion={proyecto.descripcion}

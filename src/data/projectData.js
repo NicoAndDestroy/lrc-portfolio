@@ -5,7 +5,7 @@ import mediCare from "../assets/img-projects/medicare.jpg";
 import astroFit from "../assets/img-projects/Astrofit.jpg";
 import Verbenas from "../assets/img-projects/challenge-newyze.png";
 
-export const proyectos = [
+export const projects = [
   {
     titulo: "App organizacion",
     descripcion:
@@ -91,7 +91,7 @@ export const proyectos = [
   },
   {
     titulo: "100 days coding in Js",
-    descripcion: "100 proyectos, realizados con HTML, CSS y JavaScript.",
+    descripcion: "100 projects, realizados con HTML, CSS y JavaScript.",
     imagen:
       "https://i.pinimg.com/736x/3b/4f/4e/3b4f4e170fcb1795b88f4941f49df0a2.jpg",
     tecnologias: ["Next.js", "Tailwind", "GraphQL"],
@@ -102,7 +102,7 @@ export const proyectos = [
   {
     titulo: "PlaniFy",
     descripcion:
-      "App Web para organizar tus proyectos, hecha con React + Vite, TypeScript y Tailwind para los estilos.",
+      "App Web para organizar tus projects, hecha con React + Vite, TypeScript y Tailwind para los estilos.",
     imagen:
       "https://i.pinimg.com/736x/8f/f0/bb/8ff0bbd0e5844ed254bede44522c8338.jpg",
     tecnologias: ["React", "Vite", "TypeScript", "Tailwind"],
