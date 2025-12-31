@@ -12,16 +12,21 @@ export default function ProjectsScroll({ children }) {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(el, {
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 70%",
-        },
-      });
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 75%",
+            end: "top 45%",
+            scrub: true,
+          },
+        }
+      );
     }, el);
 
     return () => ctx.revert();
