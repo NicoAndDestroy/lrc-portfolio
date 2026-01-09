@@ -7,64 +7,178 @@ export interface Props {
   imagen: string;
   tecnologias: string[];
   demo: string;
-  codigo: string;
-  categoria?: string;
+  type: "ux-ui" | "frontend" | "ecommerce";
+  status?: "published" | "coming-soon";
 }
 
-const { titulo, descripcion, imagen, tecnologias, demo, codigo, categoria } =
-  Astro.props;
+const {
+  titulo,
+  descripcion,
+  imagen,
+  tecnologias = [],
+  demo,
+  type,
+  status = "published",
+} = Astro.props;
 ---
 
 <div
-  data-categoria={categoria ?? ""}
-  class="project-card z-10 flex w-[400px] flex-col overflow-hidden rounded-lg bg-gray-900 shadow-lg transition-transform hover:scale-[1.01] lg:w-[320px] drop-shadow-[4px_4px_0_#7836cf]"
+  data-type={type}
+  class="project-card relative z-10 flex w-[400px] flex-col overflow-hidden rounded-lg
+         bg-gray-900 shadow-lg transition-transform hover:scale-[1.01]
+         lg:w-[320px] drop-shadow-[4px_4px_0_#7836cf]"
 >
+
+  <!-- =========================
+       BADGES
+  ========================== -->
+  <div class="absolute left-4 top-4 z-20 flex flex-wrap gap-2">
+
+    {type === "ux-ui" && (
+      <span class="badge badge-ux">
+        UX Case Study
+      </span>
+    )}
+
+    {type === "frontend" && (
+      <span class="badge badge-frontend">
+        Front-end Project
+      </span>
+    )}
+
+    {type === "ecommerce" && (
+      <span class="badge badge-ecommerce">
+        E-commerce Migration
+      </span>
+    )}
+
+    {status === "coming-soon" && (
+      <span class="badge badge-soon">
+        Case Study Coming Soon
+      </span>
+    )}
+
+  </div>
+
+  <!-- =========================
+       IMAGE
+  ========================== -->
   <img
     src={imagen}
-    alt={`Imagen del projects ${titulo}`}
-    class="h-50 w-full rounded-2xl object-cover p-3"
+    alt={`Project preview: ${titulo}`}
+    class="h-52 w-full object-cover p-3 rounded-2xl"
   />
-  <div class="flex grow flex-col px-3 pb-3">
-    <h3 class="text-xl font-semibold text-white">{titulo}</h3>
 
-    <div class="my-1.5 flex flex-wrap gap-2">
-      {
-        tecnologias.map((tech) => (
-          <span class="rounded-md bg-[#7836cf]/20 text-[#a27ed1] px-2 py-0.5 text-xs font-semibold">
-            {tech}
-          </span>
-        ))
-      }
+  <!-- =========================
+       CONTENT
+  ========================== -->
+  <div class="flex grow flex-col px-3 pb-4">
+    <h3 class="text-xl font-semibold text-white">
+      {titulo}
+    </h3>
+
+    <div class="my-2 flex flex-wrap gap-2">
+      {tecnologias.map((tech) => (
+        <span class="tech-pill">
+          {tech}
+        </span>
+      ))}
     </div>
 
-    <p class="flex grow text-gray-400">{descripcion}</p>
+    <p class="flex grow text-gray-400 text-sm leading-relaxed">
+      {descripcion}
+    </p>
 
-    <div class="mt-auto flex justify-between">
-      <a
-        class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
-        target="_blank"
-        rel="noopener noreferrer"
-        href={demo}
-      >
-        Demo
-        <HiArrowRight
-          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-          size={18}
-        />
-      </a>
-
-      <a
-        class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
-        href={codigo}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Código
-        <HiArrowRight
-          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-          size={18}
-        />
-      </a>
+    <!-- =========================
+         CTA
+    ========================== -->
+    <div class="mt-5">
+      {status === "published" ? (
+        <a
+          href={demo}
+          class="cta-link group"
+        >
+          View Case Study
+          <HiArrowRight
+            className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
+            size={18}
+          />
+        </a>
+      ) : (
+        <span class="cta-disabled">
+          Details coming soon
+        </span>
+      )}
     </div>
   </div>
 </div>
+
+<style>
+  /* =========================
+   BADGES
+========================= */
+.badge {
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge-ux {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.badge-frontend {
+  background: #059669;
+  color: #fff;
+}
+
+.badge-ecommerce {
+  background: #2563eb;
+  color: #fff;
+}
+
+.badge-soon {
+  background: #111827;
+  color: #d1d5db;
+  border: 1px dashed #374151;
+}
+
+/* =========================
+   TECH PILLS
+========================= */
+.tech-pill {
+  background: rgba(120, 54, 207, 0.2);
+  color: #a27ed1;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* =========================
+   CTA
+========================= */
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #69c7c7;
+  text-decoration: none;
+}
+
+.cta-link:hover {
+  color: #9fe5e5;
+}
+
+.cta-disabled {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+</style>

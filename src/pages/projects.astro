@@ -2,77 +2,120 @@
 import "../styles/projects.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/commons/hero/hero.astro";
-import ProjectCard from "../components/project/proyectCard.astro";
+import ProjectCard from "../components/projects/proyectCard.astro";
 import Banner from "../components/commons/banners/banner.astro";
 import { projects } from "../data/projectData.js";
+import ProjectCardSkeleton from "../components/projects/ProjectCardSkeleton.astro";
 ---
 
-<Layout title="projects" description="projects">
-  <Hero titulo="projects" />
-  <!-- Botones -->
-  <div class="mt-6 mb-6 flex flex-wrap justify-center gap-3 px-2">
-    <button
-      class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none"
-      data-filter="all"
-    >
-      Todos
-    </button>
-    <button
-      class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none"
-      data-filter="fullstack"
-    >
-      Full Stack
-    </button>
-    <button
-      class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none"
-      data-filter="frontend"
-    >
-      Frontend
-    </button>
-    <button
-      class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none"
-      data-filter="backend"
-    >
-      Backend
-    </button>
+<Layout title="Projects" description="Selected UX, Front-end and E-commerce work">
+  <Hero titulo="Projects" />
+
+  <!-- =========================
+       FILTERS
+  ========================== -->
+  <div class="mt-6 mb-10 flex flex-wrap justify-center gap-3 px-2">
+    <button class="filter-btn" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ux-ui">UX / UI</button>
+    <button class="filter-btn" data-filter="frontend">Front-End</button>
+    <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
   </div>
 
-  <!-- Cards -->
-  <div
-    id="projects-container"
-    class="4xl:px-96 flex flex-wrap justify-center gap-5 px-3 pt-5 xl:px-32 2xl:px-60"
-  >
-    {
-      projects.map((proyecto) => (
+  <!-- =========================
+       PROJECTS GRID
+  ========================== -->
+  <div class="relative">
+
+    <!-- SKELETON OVERLAY -->
+    <div
+      id="skeleton-layer"
+      class="pointer-events-none absolute inset-0 z-20 flex flex-wrap justify-center gap-6 px-3 xl:px-32 2xl:px-60"
+    >
+      {Array.from({ length: 6 }).map(() => (
+        <ProjectCardSkeleton />
+      ))}
+    </div>
+
+    <!-- REAL CONTENT -->
+    <div
+      id="projects-container"
+      class="relative z-10 4xl:px-96 flex flex-wrap justify-center gap-6 px-3 xl:px-32 2xl:px-60"
+    >
+      {projects.map((proyecto) => (
         <ProjectCard
           titulo={proyecto.titulo}
           descripcion={proyecto.descripcion}
           imagen={proyecto.imagen}
           tecnologias={proyecto.tecnologias}
           demo={proyecto.demo}
-          codigo={proyecto.codigo}
-          categoria={proyecto.categoria}
+          codigo={proyecto.codigo ?? undefined}
+          categoria={proyecto.categoria ?? "frontend"}
+          type={proyecto.type as "ux-ui" | "frontend" | "ecommerce"}
+          status={proyecto.status as "published" | "coming-soon" | undefined}
         />
-      ))
-    }
+      ))}
+    </div>
   </div>
 
   <Banner />
 </Layout>
 
+<!-- =========================
+     STYLES
+========================== -->
+<style>
+  .filter-btn {
+    cursor: pointer;
+    border-radius: 9999px;
+    background: #69c7c7;
+    padding: 0.4rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1d1250;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn.active {
+    background: #7836cf;
+    color: white;
+  }
+
+  .project-visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .project-hidden {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+</style>
+
+<!-- =========================
+     FILTER + SKELETON SCRIPT
+========================== -->
 <script is:inline>
   (function () {
     const VISIBLE_CLASS = "project-visible";
     const HIDDEN_CLASS = "project-hidden";
-    const HIDE_TIMEOUT = 300;
 
-    function initProjectFilter() {
+    function init() {
       const container = document.getElementById("projects-container");
+      const skeletonLayer = document.getElementById("skeleton-layer");
       const buttons = Array.from(document.querySelectorAll(".filter-btn"));
+
       if (!container || !buttons.length) return;
 
-      const cards = Array.from(container.querySelectorAll("[data-categoria]"));
-      if (!cards.length) return;
+      // 🔥 Remove skeletons after first paint
+      setTimeout(() => {
+        skeletonLayer?.remove();
+      }, 400);
+
+      const cards = Array.from(
+        container.querySelectorAll("[data-categoria]")
+      );
 
       function showCard(card) {
         card.style.display = "flex";
@@ -86,9 +129,10 @@ import { projects } from "../data/projectData.js";
         card.classList.remove(VISIBLE_CLASS);
         card.classList.add(HIDDEN_CLASS);
         setTimeout(() => {
-          if (card.classList.contains(HIDDEN_CLASS))
+          if (card.classList.contains(HIDDEN_CLASS)) {
             card.style.display = "none";
-        }, HIDE_TIMEOUT);
+          }
+        }, 250);
       }
 
       function applyFilter(filter) {
@@ -97,32 +141,26 @@ import { projects } from "../data/projectData.js";
           const categoria = (
             card.getAttribute("data-categoria") ?? ""
           ).toLowerCase();
-          const match = normalized === "all" || categoria === normalized;
+
+          const match =
+            normalized === "all" || categoria === normalized;
+
           match ? showCard(card) : hideCard(card);
         });
       }
 
-      function setActive(btn) {
-        buttons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-      }
-
       buttons.forEach((btn) => {
-        btn.onclick = () => {
-          const filter = btn.dataset.filter || "all";
-          setActive(btn);
-          applyFilter(filter);
-        };
+        btn.addEventListener("click", () => {
+          buttons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          applyFilter(btn.dataset.filter || "all");
+        });
       });
 
-      const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
-      if (allBtn) {
-        setActive(allBtn);
-        applyFilter("all");
-      }
+      applyFilter("all");
     }
 
-    document.addEventListener("astro:page-load", initProjectFilter);
-    window.addEventListener("load", initProjectFilter);
+    document.addEventListener("astro:page-load", init);
+    window.addEventListener("load", init);
   })();
 </script>

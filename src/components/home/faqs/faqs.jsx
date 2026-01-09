@@ -1,62 +1,95 @@
 import React, { useState } from "react";
 
+/* =========================
+   ICONOS POR CATEGORÍA
+========================= */
 const CategoryIcons = {
-  "Web Development": (
+  "UX / UI Process & Design": (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="text-primary h-6 w-6 opacity-70"
     >
-      <path d="M21 3C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21ZM20 11H4V19H20V11ZM20 5H4V9H20V5ZM11 6V8H9V6H11ZM7 6V8H5V6H7Z"></path>
+      <path d="M5 3h14v2H5V3zm0 4h9v2H5V7zm0 4h14v2H5v-2zm0 4h9v2H5v-2z" />
     </svg>
   ),
-  "Mobile Development": (
+
+  "Front-End & Implementation": (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="text-primary h-6 w-6 opacity-70"
     >
-      <path d="M7 4V20H17V4H7ZM6 2H18C18.5523 2 19 2.44772 19 3V21C19 21.5523 18.5523 22 18 22H6C5.44772 22 5 21.5523 5 21V3C5 2.44772 5.44772 2 6 2ZM12 17C12.5523 17 13 17.4477 13 18C13 18.5523 12.5523 19 12 19C11.4477 19 11 18.5523 11 18C11 17.4477 11.4477 17 12 17Z"></path>
+      <path d="M21 3H3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3ZM20 11H4V19H20V11ZM20 5H4V9H20V5Z" />
     </svg>
   ),
-  "UI/UX Design & Prototyping": (
+
+  "Accessibility & Inclusive Design": (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="text-primary h-6 w-6 opacity-70"
     >
-      <path d="M5.7646 7.99998L5.46944 7.26944C5.26255 6.75737 5.50995 6.17454 6.02202 5.96765L15.2939 2.22158C15.8059 2.01469 16.3888 2.26209 16.5956 2.77416L22.2147 16.6819C22.4216 17.194 22.1742 17.7768 21.6622 17.9837L12.3903 21.7298C11.8783 21.9367 11.2954 21.6893 11.0885 21.1772L11.0002 20.9586V21H7.00021C6.44792 21 6.00021 20.5523 6.00021 20V19.7303L2.65056 18.377C2.13849 18.1701 1.89109 17.5873 2.09798 17.0752L5.7646 7.99998ZM8.00021 19H10.2089L8.00021 13.5333V19ZM6.00021 12.7558L4.32696 16.8972L6.00021 17.6084V12.7558ZM7.69842 7.44741L12.5683 19.5008L19.9858 16.5039L15.1159 4.45055L7.69842 7.44741ZM10.6766 9.47974C10.1645 9.68663 9.5817 9.43924 9.37481 8.92717C9.16792 8.4151 9.41532 7.83227 9.92739 7.62538C10.4395 7.41849 11.0223 7.66588 11.2292 8.17795C11.4361 8.69002 11.1887 9.27286 10.6766 9.47974Z"></path>
+      <path d="M12 2a2 2 0 100 4 2 2 0 000-4zm7 6H5v2h6v12h2V10h6V8z" />
+    </svg>
+  ),
+
+  "Tools & Technologies": (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="text-primary h-6 w-6 opacity-70"
+    >
+      <path d="M14.7 6.3a1 1 0 010 1.4l-1 1 2.6 2.6 1-1a1 1 0 011.4 1.4l-1 1 1.3 1.3-1.4 1.4-1.3-1.3-1 1a1 1 0 01-1.4-1.4l1-1-2.6-2.6-1 1a1 1 0 01-1.4-1.4l1-1L8.3 7.7 6.9 9.1 5.5 7.7l2.8-2.8a1 1 0 011.4 0l1 1 2.6-2.6-1-1a1 1 0 011.4-1.4l1 1z" />
+    </svg>
+  ),
+
+  "Collaboration & Workflow": (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="text-primary h-6 w-6 opacity-70"
+    >
+      <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
     </svg>
   ),
 };
 
-const SkillsList = () => {
-  const [openItem, setOpenItem] = useState(null);
-
+/* =========================
+   CONTENIDO FAQ
+========================= */
 const skills = {
-  "What technologies do I use?": [
-    "My main stack includes HTML5, CSS3, modern JavaScript (ES6+), TypeScript, Bootstrap 5, Tailwind CSS, Astro, and React. I also work with CMS and e-commerce platforms such as WordPress, WooCommerce, Shopify (Liquid), and custom CMS environments. A significant part of my work involves implementing WCAG AA accessibility standards, semantic HTML, and performance best practices to deliver inclusive and optimized user experiences."
+  "UX / UI Process & Design": [
+    "I approach projects from a UX-first perspective. My process includes research, benchmarking, user personas, user flows, information architecture, wireframing (low, mid, and high fidelity), and iterative UI design in Figma. Design decisions are validated through usability principles, accessibility guidelines, and conversion-oriented thinking."
   ],
 
-  "My Experience": [
-    "I specialize in front-end migrations and modernizations for large-scale e-commerce environments. My work includes refactoring legacy HTML/CSS/Bootstrap 3 codebases into accessible, maintainable Bootstrap 5 and semantic HTML structures. I build reusable UI components, reinforce accessibility through proper ARIA usage, keyboard navigation support, and color contrast, and ensure consistent responsiveness across the CMS. I also develop new interfaces using Astro, React, and Tailwind, frequently working from Figma designs and applying accessibility and SEO best practices as a core part of the development process."
+  "Front-End & Implementation": [
+    "I translate UX and UI decisions into clean, scalable, and accessible front-end code. I work with HTML5, CSS3, modern JavaScript (ES6+), TypeScript, Tailwind CSS, Bootstrap 5, Astro, and React, ensuring design consistency, responsiveness, and performance."
   ],
 
-  "My Background": [
-    "My training combines technical education with continuous self-learning. Through programs like Oracle Next Education (ONE), Alura, SENA, and independent development, I have built strong foundations in modern web development, UI/UX principles, accessibility, and SEO. I stay up-to-date with industry standards, focusing on frameworks such as React, Next.js, Astro, and best practices for building accessible, scalable interfaces."
+  "Accessibility & Inclusive Design": [
+    "Accessibility is a core part of my workflow, not an afterthought. I implement WCAG AA standards using semantic HTML, proper heading structure, ARIA when needed, keyboard navigation, focus management, and sufficient color contrast. Accessibility is treated as a UX requirement."
   ],
 
-  "How do I work in a team?": [
-    "I collaborate effectively with designers, PMs, QA, and other developers, ensuring that accessibility, maintainability, and clarity are part of every deliverable. I use Git and GitHub for version control, code reviews, and structured workflows. I document my decisions, communicate openly, and prioritize solutions that scale well for both end-users and the development team."
+  "Tools & Technologies": [
+    "I use Figma for design systems, wireframes, and prototypes. On the development side, I work with Git, GitHub, Astro, React, Tailwind, Bootstrap, and CMS platforms such as WordPress, WooCommerce, Shopify (Liquid), and custom CMS environments."
   ],
 
-  "Agile Methodologies": [
-    "I work with Scrum and Kanban methodologies, participating in sprints, daily stand-ups, and iterative improvements. I use Jira, Trello, and GitHub Projects to plan, track, and document progress. I incorporate accessibility considerations early in the development cycle, ensuring that features meet WCAG AA standards as part of the definition of done."
+  "Collaboration & Workflow": [
+    "I collaborate closely with designers, PMs, QA, and developers in Agile environments (Scrum and Kanban). I document decisions, participate in reviews, and prioritize scalable solutions that benefit both users and development teams."
   ]
 };
+
+/* =========================
+   COMPONENTE
+========================= */
+const SkillsList = () => {
+  const [openItem, setOpenItem] = useState(null);
 
   const toggleItem = (item) => {
     setOpenItem(openItem === item ? null : item);
@@ -68,30 +101,30 @@ const skills = {
         <h2 className="text-white text-center text-4xl font-bold drop-shadow-[2px_2px_0_#7836cf]">
           About me and my work
         </h2>
-        <ul className="mt-8 space-y-4 text-lg drop-shadow-[2px_2px_0_#7836cf]">
+
+        <ul className="mt-8 space-y-4 text-lg">
           {Object.entries(skills).map(([category, items]) => (
             <li key={category} className="w-full">
               <div
                 onClick={() => toggleItem(category)}
-                className="bg-gray-900 hover:bg-opacity-80 w-full cursor-pointer overflow-hidden rounded-2xl text-left transition-all"
+                className="bg-gray-900 hover:bg-opacity-80 w-full cursor-pointer rounded-2xl transition-all"
               >
                 <div className="flex items-center gap-3 p-4">
                   {CategoryIcons[category]}
                   <div className="flex grow items-center justify-between gap-2">
-                    <div className="max-w-[200px] min-w-0 overflow-hidden md:max-w-none">
-                      <span className="block truncate text-lg text-white drop-shadow-[1px_1px_0_#7836cf] font-bold">
-                        {category}
-                      </span>
-                    </div>
+                    <span className="text-lg font-bold text-white">
+                      {category}
+                    </span>
+
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className={`h-6 w-6 shrink-0 transform text-[#6a2cbb] transition-transform ${
+                      className={`h-6 w-6 transform text-primary transition-transform ${
                         openItem === category ? "rotate-180" : ""
                       }`}
                     >
-                      <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                      <path d="M12 15.5l-6-6 1.4-1.4L12 12.7l4.6-4.6L18 9.5z" />
                     </svg>
                   </div>
                 </div>
@@ -103,8 +136,8 @@ const skills = {
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <p className="text-[0.8em] text-white text-semibold ">
-                    {skills[category]}
+                  <p className="text-sm text-gray-300">
+                    {items}
                   </p>
                 </div>
               </div>
@@ -115,4 +148,5 @@ const skills = {
     </div>
   );
 };
+
 export default SkillsList;
